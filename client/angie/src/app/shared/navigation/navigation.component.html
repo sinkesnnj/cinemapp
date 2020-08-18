@@ -24,8 +24,14 @@
             <li class="nav-item">
                 <strong class="nav-link">|</strong>
             </li>
-            <li class="nav-item" routerLinkActive="active">
+            <li class="nav-item" routerLinkActive="active" *ngIf="!tokenAuthService.userSignedIn()">
                 <a class="nav-link" routerLink="/sign_in">Log In</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="tokenAuthService.userSignedIn()">
+                <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="tokenAuthService.userSignedIn()">
+                <a class="nav-link" href="#" (click)="tokenAuthService.signOut()">Log Out</a>
             </li>
         </ul>
         </div>

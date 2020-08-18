@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  token_auth_config: {
+    apiBase: 'http://localhost:3000',
+    signInPath: 'auth/sign_in',
+    signInRedirect: '/dashboard',
+
+    globalOptions: {
+      headers: {
+          'Content-Type':     'application/json',
+          'Accept':           'application/json'
+      }
+  }
+  }
 };
 
 /*
