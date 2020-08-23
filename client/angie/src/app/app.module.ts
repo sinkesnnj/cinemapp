@@ -14,6 +14,7 @@ import { TheatresComponent } from './modules/theatres/theatres.component';
 import { NewsComponent } from './modules/news/news.component';
 import { SessionComponent } from './modules/session/session.component';
 import { StateService } from './core/services/state.service';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { StateService } from './core/services/state.service';
     MoviesComponent,
     TheatresComponent,
     NewsComponent,
-    SessionComponent
+    SessionComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

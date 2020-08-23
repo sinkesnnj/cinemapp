@@ -3,24 +3,24 @@ import { Angular2TokenService } from 'angular2-token';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.css']
 })
-export class DashboardComponent implements OnInit {
-  movies = [];
+export class CarouselComponent implements OnInit {
+  carousels = [];
 
   constructor(public tokenAuthService: Angular2TokenService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('movies/dashboard').subscribe(
+    this.tokenAuthService.get('news/carousel').subscribe(
       res => {
         if (res.status == 200){
-          this.movies = res.json().data.movies;
+          this.carousels = res.json().data.news;
         }
       }
     );
-  }
+  } 
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-news',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public tokenAuthService: Angular2TokenService,
+  ) { }
 
   ngOnInit(): void {
   }
