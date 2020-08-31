@@ -17,6 +17,8 @@ import { StateService } from './core/services/state.service';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { MoviePreviewComponent } from './modules/movie_preview/movie_preview.component';
 import { NewsDetailComponent } from './modules/news-detail/news-detail.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { NewsDetailComponent } from './modules/news-detail/news-detail.component
     SessionComponent,
     CarouselComponent,
     MoviePreviewComponent,
-    NewsDetailComponent
+    NewsDetailComponent,
+    CategoriesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

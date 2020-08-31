@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/news/index', to: 'news#index'
   get '/news/carousel', to: 'news#carousel'
+  get '/news/categories', to: 'news#categories'
   get '/news/show/:id', to: 'news#show'
 
   get '/movies/index', to: 'movies#index'

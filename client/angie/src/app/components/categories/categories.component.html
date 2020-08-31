@@ -1,0 +1,22 @@
+<!-- Categories Widget -->
+<div class="card my-4">
+    <h5 class="card-header">Top Categories</h5>
+    <div class="card-body">
+        <div class="row">
+        <div class="col-lg-6" *ngIf="left_side_categories">
+            <ul class="list-unstyled mb-0">
+                <li *ngFor="let categorie of left_side_categories">
+                    <a class="text-info add-cursor" (click)="filterNews($event, categorie.id)">{{categorie.title}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-6" *ngIf="right_side_categories">
+            <ul class="list-unstyled mb-0">
+                <li *ngFor="let categorie of right_side_categories">
+                    <a class="text-info add-cursor" (click)="filterNews($event, categorie.id)">{{categorie.title}}</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</div>
