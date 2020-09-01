@@ -1,0 +1,37 @@
+
+<div class="d-flex" id="wrapper">
+
+   <!-- Sidebar -->
+   <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Manage Cinemapp</div>
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+      <a routerLink="/admin/movies" class="list-group-item list-group-item-action bg-light">Movies</a>
+      <a routerLink="/admin/movie_actors" class="list-group-item list-group-item-action bg-light">Movie Actors</a>
+      <a routerLink="/admin/actors" class="list-group-item list-group-item-action bg-light">Actors</a>
+      <a routerLink="/admin/actor_roles" class="list-group-item list-group-item-action bg-light">Actor Roles</a>
+      <a routerLink="/admin/categories" class="list-group-item list-group-item-action bg-light">Categories</a>
+      <a routerLink="/admin/genres" class="list-group-item list-group-item-action bg-light">Genres</a>
+      <a routerLink="/admin/news" class="list-group-item list-group-item-action bg-light">News</a>
+      <a routerLink="/admin/news_categories" class="list-group-item list-group-item-action bg-light">News Categories</a>
+      <a routerLink="/admin/users" class="list-group-item list-group-item-action bg-light">Users</a>
+      <a routerLink="/admin/theatres" class="list-group-item list-group-item-action bg-light">Theatres</a>
+      <a routerLink="/admin/showtimes" class="list-group-item list-group-item-action bg-light">Showtimes</a>
+      <a routerLink="/admin/showtime_users" class="list-group-item list-group-item-action bg-light">Showtime Users</a>
+      <a routerLink="/admin/roles" class="list-group-item list-group-item-action bg-light">Roles</a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <div class="container-fluid">
+        <h1 class="mt-4">Manipulate Showtimes</h1>
+        <app-list [url]="this.url" [headers]="this.headers" [title]="this.title" [objectKeys]="this.objectKeys"></app-list>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+

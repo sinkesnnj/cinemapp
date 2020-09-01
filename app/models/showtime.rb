@@ -1,0 +1,2 @@
+class Showtime < ApplicationRecord
+end

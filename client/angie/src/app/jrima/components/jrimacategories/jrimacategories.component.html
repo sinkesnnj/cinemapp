@@ -1,0 +1,86 @@
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Manage Cinemapp</div>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+          <a routerLink="/admin/movies" class="list-group-item list-group-item-action bg-light">Movies</a>
+          <a routerLink="/admin/movie_actors" class="list-group-item list-group-item-action bg-light">Movie Actors</a>
+          <a routerLink="/admin/actors" class="list-group-item list-group-item-action bg-light">Actors</a>
+          <a routerLink="/admin/actor_roles" class="list-group-item list-group-item-action bg-light">Actor Roles</a>
+          <a routerLink="/admin/categories" class="list-group-item list-group-item-action bg-light">Categories</a>
+          <a routerLink="/admin/genres" class="list-group-item list-group-item-action bg-light">Genres</a>
+          <a routerLink="/admin/news" class="list-group-item list-group-item-action bg-light">News</a>
+          <a routerLink="/admin/news_categories" class="list-group-item list-group-item-action bg-light">News Categories</a>
+          <a routerLink="/admin/users" class="list-group-item list-group-item-action bg-light">Users</a>
+          <a routerLink="/admin/theatres" class="list-group-item list-group-item-action bg-light">Theatres</a>
+          <a routerLink="/admin/showtimes" class="list-group-item list-group-item-action bg-light">Showtimes</a>
+          <a routerLink="/admin/showtime_users" class="list-group-item list-group-item-action bg-light">Showtime Users</a>
+          <a routerLink="/admin/roles" class="list-group-item list-group-item-action bg-light">Roles</a>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <div class="container-fluid">
+        <h1 class="mt-4">Manipulate Categories</h1>
+        <div class="card mb-5">
+            <div class="card-header">Categories</div>
+            <div class="card-block p-0">
+                <table class="table table-bordered table-sm m-0">
+                    <thead class="">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let categorie of categories">
+                            <td>{{categorie.id}}</td>
+                            <td>{{categorie.name}}</td>
+                            <td align="right">
+                                <button class="btn btn-primary a-btn-slide-text button-do-action">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    <span><strong>Edit</strong></span>            
+                                </button>
+                                <button class="btn btn-primary a-btn-slide-text button-do-action" (click)="this.deleteCategorie(this.categorie.id)">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                     <span><strong>Delete</strong></span>            
+                                 </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer p-0">
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-end mt-3 mr-3">
+                        <li class="page-item" [ngClass]="{'disabled': this.page < 2}">
+                            <span *ngIf="this.page < 2" class="page-link">Previous</span>
+                            <button *ngIf="this.page > 1" class="page-link" (click)="this.getPage(this.page -1)">Previous</button>
+                        </li>
+                        <li *ngIf="this.page > 1" class="page-item"><button class="page-link" (click)="this.getPage(this.page -1)">{{this.page - 1}}</button></li>
+                        <li class="page-item active">
+                            <span class="page-link">{{this.page}}<span class="sr-only">(current)</span>
+                            </span>
+                        </li>
+                        <li *ngIf="this.hasNextPage" class="page-item"><button class="page-link" (click)="this.getPage(this.page +1)">{{this.page + 1}}</button></li>
+                        <li class="page-item" [ngClass]="{'disabled': !this.hasNextPage}">
+                            <span *ngIf="!this.hasNextPage" class="page-link">Next</span>
+                            <button *ngIf="this.hasNextPage" class="page-link"  (click)="this.getPage(this.page +1)">Next</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+

@@ -1,0 +1,49 @@
+<div class="card mb-5">
+    <div class="card-header">{{title}}</div>
+    <div class="card-block p-0">
+        <table class="table table-bordered table-sm m-0">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th *ngFor="let header of headers">{{header}}</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <td *ngFor="let one of objectKeys">{{item[one]}}</td>
+                    <td align="right">
+                        <button class="btn btn-primary a-btn-slide-text button-do-action">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <span><strong>Edit</strong></span>            
+                        </button>
+                        <button class="btn btn-primary a-btn-slide-text button-do-action" (click)="this.deleteItem(this.item.id)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                             <span><strong>Delete</strong></span>            
+                         </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer p-0">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-end mt-3 mr-3">
+                <li class="page-item" [ngClass]="{'disabled': page < 2}">
+                    <span *ngIf="page < 2" class="page-link">Previous</span>
+                    <button *ngIf="page > 1" class="page-link" (click)="this.getPage(page -1)">Previous</button>
+                </li>
+                <li *ngIf="page > 1" class="page-item"><button class="page-link" (click)="this.getPage(page -1)">{{page - 1}}</button></li>
+                <li class="page-item active">
+                    <span class="page-link">{{page}}<span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                <li *ngIf="this.hasNextPage" class="page-item"><button class="page-link" (click)="this.getPage(page +1)">{{page + 1}}</button></li>
+                <li class="page-item" [ngClass]="{'disabled': !this.hasNextPage}">
+                    <span *ngIf="!this.hasNextPage" class="page-link">Next</span>
+                    <button *ngIf="this.hasNextPage" class="page-link"  (click)="this.getPage(page +1)">Next</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

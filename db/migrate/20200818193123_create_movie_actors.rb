@@ -3,7 +3,7 @@ class CreateMovieActors < ActiveRecord::Migration[6.0]
     create_table :movie_actors do |t|
       t.integer :movie_id, null: false
       t.integer :actor_id, null: false
-      t.string :character_namem, null: false
+      t.string :character_name, null: false
       t.timestamps
     end
   end
