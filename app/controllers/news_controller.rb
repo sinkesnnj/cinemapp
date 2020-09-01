@@ -65,4 +65,38 @@ class NewsController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        news = News.new(params.permit!.except(:controller, :action))
+        status = news.save ? 200 : 400
+
+        render json: {}, status: status
+    end
+
+    def edit
+        news = News.find(params[:id])
+
+        render json: {
+            data: {
+                model: news
+            }
+        }, status: 200
+    end
+
+    def update
+        news = News.find(params[:id])
+        if news.present?
+            news.title = params[:title] if params.key?(:title)
+            news.short_description = params[:short_description] if params.key?(:short_description)
+            news.story_text = params[:story_text] if params.key?(:story_text)
+            news.release_date = params[:release_date] if params.key?(:release_date)
+            news.poster_path = params[:poster_path] if params.key?(:poster_path)
+
+            status = news.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

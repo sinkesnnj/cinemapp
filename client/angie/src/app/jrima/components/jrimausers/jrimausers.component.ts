@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class JrimausersComponent implements OnInit {
   url = 'admin/users';
   title = 'Users';
-  headers = ['Name', 'Email', 'Last sign in at'];
-  objectKeys = ['id', 'name', 'email', 'last_sign_in_at'];
+  headers = ['Name', 'Email', 'Nickname'];
+  objectKeys = ['id', 'name', 'email', 'nickname'];
 
   constructor() { }
 

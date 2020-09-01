@@ -41,6 +41,18 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
 import { FormComponent } from './shared/form/form.component';
+import { JrimaEditMovieActorsComponent } from './jrima/components/jrima-edit-movie-actors/jrima-edit-movie-actors.component';
+import { JrimaEditActorsComponent } from './jrima/components/jrima-edit-actors/jrima-edit-actors.component';
+import { JrimaEditActorRolesComponent } from './jrima/components/jrima-edit-actor-roles/jrima-edit-actor-roles.component';
+import { JrimaEditCategoriesComponent } from './jrima/components/jrima-edit-categories/jrima-edit-categories.component';
+import { JrimaEditGenresComponent } from './jrima/components/jrima-edit-genres/jrima-edit-genres.component';
+import { JrimaEditNewsComponent } from './jrima/components/jrima-edit-news/jrima-edit-news.component';
+import { JrimaEditNewsCategoriesComponent } from './jrima/components/jrima-edit-news-categories/jrima-edit-news-categories.component';
+import { JrimaEditUsersComponent } from './jrima/components/jrima-edit-users/jrima-edit-users.component';
+import { JrimaEditTheatresComponent } from './jrima/components/jrima-edit-theatres/jrima-edit-theatres.component';
+import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showtimes/jrima-edit-showtimes.component';
+import { JrimaEditShowtimeUsersComponent } from './jrima/components/jrima-edit-showtime-users/jrima-edit-showtime-users.component';
+import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jrima-edit-roles.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +83,19 @@ import { FormComponent } from './shared/form/form.component';
     JrimaMovieActorsComponent,
     JrimaActorRolesComponent,
     JrimaEditMoviesComponent,
-    FormComponent
+    FormComponent,
+    JrimaEditMovieActorsComponent,
+    JrimaEditActorsComponent,
+    JrimaEditActorRolesComponent,
+    JrimaEditCategoriesComponent,
+    JrimaEditGenresComponent,
+    JrimaEditNewsComponent,
+    JrimaEditNewsCategoriesComponent,
+    JrimaEditUsersComponent,
+    JrimaEditTheatresComponent,
+    JrimaEditShowtimesComponent,
+    JrimaEditShowtimeUsersComponent,
+    JrimaEditRolesComponent
   ],
   imports: [
     BrowserModule,

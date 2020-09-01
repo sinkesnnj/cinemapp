@@ -17,4 +17,34 @@ class GenresController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        genre = Genre.new(params.permit!.except(:controller, :action))
+        status = genre.save ? 200 : 400
+
+        render json: {}, status: status
+    end
+
+    def edit
+        genre = Genre.find(params[:id])
+
+        render json: {
+            data: {
+                model: genre
+            }
+        }, status: 200
+    end
+
+    def update
+        genre = Genre.find(params[:id])
+        if genre.present?
+            genre.genre_name = params[:genre_name] if params.key?(:genre_name)
+
+            status = genre.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

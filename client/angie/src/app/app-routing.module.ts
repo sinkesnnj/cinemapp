@@ -23,6 +23,18 @@ import { JrimaNewsCategoriesComponent } from './jrima/components/jrima-news-cate
 import { JrimaMovieActorsComponent } from './jrima/components/jrima-movie-actors/jrima-movie-actors.component';
 import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/jrima-actor-roles.component';
 import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
+import { JrimaEditMovieActorsComponent } from './jrima/components/jrima-edit-movie-actors/jrima-edit-movie-actors.component';
+import { JrimaEditActorsComponent } from './jrima/components/jrima-edit-actors/jrima-edit-actors.component';
+import { JrimaEditActorRolesComponent } from './jrima/components/jrima-edit-actor-roles/jrima-edit-actor-roles.component';
+import { JrimaEditCategoriesComponent } from './jrima/components/jrima-edit-categories/jrima-edit-categories.component';
+import { JrimaEditGenresComponent } from './jrima/components/jrima-edit-genres/jrima-edit-genres.component';
+import { JrimaEditNewsComponent } from './jrima/components/jrima-edit-news/jrima-edit-news.component';
+import { JrimaEditNewsCategoriesComponent } from './jrima/components/jrima-edit-news-categories/jrima-edit-news-categories.component';
+import { JrimaEditUsersComponent } from './jrima/components/jrima-edit-users/jrima-edit-users.component';
+import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jrima-edit-roles.component';
+import { JrimaEditShowtimeUsersComponent } from './jrima/components/jrima-edit-showtime-users/jrima-edit-showtime-users.component';
+import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showtimes/jrima-edit-showtimes.component';
+import { JrimaEditTheatresComponent } from './jrima/components/jrima-edit-theatres/jrima-edit-theatres.component';
 
 
 const routes: Routes = [
@@ -38,17 +50,41 @@ const routes: Routes = [
   { path: 'admin/movies/new', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},
   { path: 'admin/movies/:id', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},
   { path: 'admin/actors', component: JrimaactorsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/actors/new', component: JrimaEditActorsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/actors/:id', component: JrimaEditActorsComponent, canActivate: [AuthGuard]},
   { path: 'admin/categories', component: JrimacategoriesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/categories/new', component: JrimaEditCategoriesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/categories/:id', component: JrimaEditCategoriesComponent, canActivate: [AuthGuard]},
   { path: 'admin/genres', component: JrimagenresComponent, canActivate: [AuthGuard]},
+  { path: 'admin/genres/new', component: JrimaEditGenresComponent, canActivate: [AuthGuard]},
+  { path: 'admin/genres/:id', component: JrimaEditGenresComponent, canActivate: [AuthGuard]},
   { path: 'admin/news', component: JrimanewsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/news/new', component: JrimaEditNewsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/news/:id', component: JrimaEditNewsComponent, canActivate: [AuthGuard]},
   { path: 'admin/users', component: JrimausersComponent, canActivate: [AuthGuard]},
+  { path: 'admin/users/new', component: JrimaEditUsersComponent, canActivate: [AuthGuard]},
+  { path: 'admin/users/:id', component: JrimaEditUsersComponent, canActivate: [AuthGuard]},
   { path: 'admin/theatres', component: JrimatheatresComponent, canActivate: [AuthGuard]},
+  { path: 'admin/theatres/new', component: JrimaEditTheatresComponent, canActivate: [AuthGuard]},
+  { path: 'admin/theatres/:id', component: JrimaEditTheatresComponent, canActivate: [AuthGuard]},
   { path: 'admin/showtimes', component: JrimashowtimesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/showtimes/new', component: JrimaEditShowtimesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/showtimes/:id', component: JrimaEditShowtimesComponent, canActivate: [AuthGuard]},
   { path: 'admin/showtime_users', component: JrimaShowtimeUsersComponent, canActivate: [AuthGuard]},
+  { path: 'admin/showtime_users/new', component: JrimaEditShowtimeUsersComponent, canActivate: [AuthGuard]},
+  { path: 'admin/showtime_users/:id', component: JrimaEditShowtimeUsersComponent, canActivate: [AuthGuard]},
   { path: 'admin/roles', component: JrimaRolesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/roles/new', component: JrimaEditRolesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/roles/:id', component: JrimaEditRolesComponent, canActivate: [AuthGuard]},
   { path: 'admin/news_categories', component: JrimaNewsCategoriesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/news_categories/new', component: JrimaEditNewsCategoriesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/news_categories/:id', component: JrimaEditNewsCategoriesComponent, canActivate: [AuthGuard]},
   { path: 'admin/movie_actors', component: JrimaMovieActorsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/movie_actors/new', component: JrimaEditMovieActorsComponent, canActivate: [AuthGuard]},
+  { path: 'admin/movie_actors/:id', component: JrimaEditMovieActorsComponent, canActivate: [AuthGuard]},
   { path: 'admin/actor_roles', component: JrimaActorRolesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/actor_roles/new', component: JrimaEditActorRolesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/actor_roles/:id', component: JrimaEditActorRolesComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

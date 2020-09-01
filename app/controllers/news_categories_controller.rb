@@ -26,4 +26,39 @@ class NewsCategoriesController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        if News.find(params[:news_id]).blank? || Categorie.find(params[:categorie_id]).blank?
+            status = 400
+        else
+            news_categorie = NewsCategorie.new(params.permit!.except(:controller, :action))
+            status = news_categorie.save ? 200 : 400
+        end
+
+        render json: {}, status: status
+    end
+
+    def edit
+        news_categorie = NewsCategorie.find(params[:id])
+
+        render json: {
+            data: {
+                model: news_categorie
+            }
+        }, status: 200
+    end
+
+    def update
+        news_categorie = NewsCategorie.find(params[:id])
+        if news_categorie.present? && News.find(params[:news_id]).present? && Categorie.find(params[:categorie_id]).present?
+            news_categorie.news_id = params[:news_id] if params.key?(:news_id)
+            news_categorie.categorie_id = params[:categorie_id] if params.key?(:categorie_id)
+
+            status = news_categorie.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

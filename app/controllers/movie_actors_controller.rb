@@ -26,4 +26,40 @@ class MovieActorsController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        if Movie.find(params[:movie_id]).blank? || Actor.find(params[:actor_id]).blank?
+            status = 400
+        else
+            movie_actor = MovieActor.new(params.permit!.except(:controller, :action))
+            status = movie_actor.save ? 200 : 400
+        end
+
+        render json: {}, status: status
+    end
+
+    def edit
+        movie_actor = MovieActor.find(params[:id])
+
+        render json: {
+            data: {
+                model: movie_actor
+            }
+        }, status: 200
+    end
+
+    def update
+        movie_actor = MovieActor.find(params[:id])
+        if movie_actor.present?
+            movie_actor.movie_id = params[:movie_id] if params.key?(:movie_id)
+            movie_actor.actor_id = params[:actor_id] if params.key?(:actor_id)
+            movie_actor.character_namem = params[:character_namem] if params.key?(:character_namem)
+
+            status = movie_actor.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

@@ -28,4 +28,41 @@ class ShowtimeUsersController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        if Showtime.find(params[:showtime_id]).blank? && User.find(params[:user_id]).blank?
+            status = 400
+        else
+            showtime_user = ShowtimeUser.new(params.permit!.except(:controller, :action))
+            status = showtime_user.save ? 200 : 400
+        end
+
+        render json: {}, status: status
+    end
+
+    def edit
+        showtime_user = ShowtimeUser.find(params[:id])
+
+        render json: {
+            data: {
+                model: showtime_user
+            }
+        }, status: 200
+    end
+
+    def update
+        showtime_user = ShowtimeUser.find(params[:id])
+        if showtime_user.present? && Showtime.find(params[:showtime_id]).present? && User.find(params[:user_id]).present?
+            showtime_user.showtime_id = params[:showtime_id] if params.key?(:showtime_id)
+            showtime_user.user_id = params[:user_id] if params.key?(:user_id)
+            showtime_user.row_number = params[:row_number] if params.key?(:row_number)
+            showtime_user.seat_number = params[:seat_number] if params.key?(:seat_number)
+
+            status = showtime_user.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

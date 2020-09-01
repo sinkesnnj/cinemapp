@@ -27,4 +27,37 @@ class TheatresController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        theatre = Theatre.new(params.permit!.except(:controller, :action))
+        status = theatre.save ? 200 : 400
+
+        render json: {}, status: status
+    end
+
+    def edit
+        theatre = Theatre.find(params[:id])
+
+        render json: {
+            data: {
+                model: theatre
+            }
+        }, status: 200
+    end
+
+    def update
+        theatre = Theatre.find(params[:id])
+        if theatre.present?
+            theatre.name = params[:name] if params.key?(:name)
+            theatre.seating_capacity = params[:seating_capacity] if params.key?(:seating_capacity)
+            theatre.image_path = params[:image_path] if params.key?(:image_path)
+            theatre.description = params[:description] if params.key?(:description)
+
+            status = theatre.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

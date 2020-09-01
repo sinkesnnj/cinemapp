@@ -17,4 +17,34 @@ class RolesController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        role = Role.new(params.permit!.except(:controller, :action))
+        status = role.save ? 200 : 400
+
+        render json: {}, status: status
+    end
+
+    def edit
+        role = Role.find(params[:id])
+
+        render json: {
+            data: {
+                model: role
+            }
+        }, status: 200
+    end
+
+    def update
+        role = Role.find(params[:id])
+        if role.present?
+            role.role_type = params[:role_type] if params.key?(:role_type)
+
+            status = role.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end

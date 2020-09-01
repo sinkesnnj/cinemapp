@@ -26,4 +26,39 @@ class ActorRolesController < ApplicationController
 
         render json: {}, status: status
     end
+
+    def create
+        if Actor.find(params[:actor_id]).blank? || Role.find(params[:role_id]).blank?
+            status = 400
+        else
+            actor_role = ActorRole.new(params.permit!.except(:controller, :action))
+            status = actor_role.save ? 200 : 400
+        end
+
+        render json: {}, status: status
+    end
+
+    def edit
+        actor_role = ActorRole.find(params[:id])
+
+        render json: {
+            data: {
+                model: actor_role
+            }
+        }, status: 200
+    end
+
+    def update
+        actor_role = ActorRole.find(params[:id])
+        if actor_role.present?
+            actor_role.role_id = params[:role_id] if params.key?(:role_id)
+            actor_role.actor_id = params[:actor_id] if params.key?(:actor_id)
+
+            status = actor_role.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
+    end
 end
