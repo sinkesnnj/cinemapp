@@ -22,6 +22,7 @@ import { JrimaRolesComponent } from './jrima/components/jrima-roles/jrima-roles.
 import { JrimaNewsCategoriesComponent } from './jrima/components/jrima-news-categories/jrima-news-categories.component';
 import { JrimaMovieActorsComponent } from './jrima/components/jrima-movie-actors/jrima-movie-actors.component';
 import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/jrima-actor-roles.component';
+import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,8 @@ const routes: Routes = [
   { path: 'news/:id', component: NewsDetailComponent },
   { path: 'sign_in', component: SessionComponent },
   { path: 'admin/movies', component: JrimamovieComponent, canActivate: [AuthGuard]},
+  { path: 'admin/movies/new', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},
+  { path: 'admin/movies/:id', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},
   { path: 'admin/actors', component: JrimaactorsComponent, canActivate: [AuthGuard]},
   { path: 'admin/categories', component: JrimacategoriesComponent, canActivate: [AuthGuard]},
   { path: 'admin/genres', component: JrimagenresComponent, canActivate: [AuthGuard]},

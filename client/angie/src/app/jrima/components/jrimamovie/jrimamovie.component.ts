@@ -9,46 +9,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./jrimamovie.component.css']
 })
 export class JrimamovieComponent implements OnInit {
-  movies: [];
-  page = 1;
-  hasNextPage = false;
+  url = 'admin/movies';
+  title = 'Movies';
+  headers = ['Movie Name', 'Release Date', 'Run Time', 'Rating'];
+  objectKeys = ['id', 'name', 'release_date', 'run_time', 'rating'];
 
-  constructor(public tokenAuthService: Angular2TokenService, private toastr: ToastrService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getMovies(this.page);
-  }
-
-  getPage(page) {
-    this.page = page;
-    this.getMovies(this.page);
-  }
-
-  getMovies(page) {
-    this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('admin/movies?page='+page).subscribe(
-      res => {
-        if (res.status == 200){
-          let movies = res.json().data.movies;
-          this.hasNextPage = movies.length > 10;
-          this.movies = movies.slice(0, 10);
-        }
-      }
-    );
-  }
-
-  deleteMovie(id) {
-    this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.delete('admin/movie/'+id).subscribe(
-      res => {
-        if (res.status == 200){
-          this.getMovies(this.page);
-          this.toastr.success('Action successful!', '', {positionClass: 'toast-bottom-right'});
-        } else {
-          this.toastr.error('Something went wrong', '', {positionClass: 'toast-bottom-right'});
-        }
-      }
-    );
   }
 
 }

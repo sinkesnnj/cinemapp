@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Angular2TokenService } from 'angular2-token';
 import { HttpModule } from '@angular/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -37,6 +37,10 @@ import { JrimaRolesComponent } from './jrima/components/jrima-roles/jrima-roles.
 import { JrimaNewsCategoriesComponent } from './jrima/components/jrima-news-categories/jrima-news-categories.component';
 import { JrimaMovieActorsComponent } from './jrima/components/jrima-movie-actors/jrima-movie-actors.component';
 import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/jrima-actor-roles.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
+import { FormComponent } from './shared/form/form.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,9 @@ import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/j
     JrimaRolesComponent,
     JrimaNewsCategoriesComponent,
     JrimaMovieActorsComponent,
-    JrimaActorRolesComponent
+    JrimaActorRolesComponent,
+    JrimaEditMoviesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,10 @@ import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/j
     HttpModule,
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule
   ],
   providers: [
     StateService,

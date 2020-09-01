@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
   page = 1;
   hasNextPage = false;
 
-  constructor(public tokenAuthService: Angular2TokenService, private toastr: ToastrService) { }
+  constructor(public tokenAuthService: Angular2TokenService, private toastr: ToastrService, public router: Router) { }
 
   ngOnInit() {
     this.getItems(this.page);
@@ -53,6 +54,10 @@ export class ListComponent implements OnInit {
         }
       }
     );
+  }
+
+  editItem(id){
+    this.router.navigate([this.url + '/' + id]);
   }
 
 }

@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   get '/theatres/index', to: 'theatres#index'
 
   get '/admin/movies', to: 'movies#admin'
-  delete '/admin/movie/:id', to: 'movies#destroy'
+  post '/admin/movies/create', to: 'movies#create'
+  get '/admin/movies/:id', to: 'movies#edit'
+  put '/admin/movies/:id', to: 'movies#update'
+  delete '/admin/movies/:id', to: 'movies#destroy'
  
   get '/admin/actors', to: 'actors#admin'
 

@@ -1,4 +1,3 @@
-
 <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -30,11 +29,12 @@
         <h1 class="mt-4">Manipulate movies</h1>
         <div class="card mb-5">
             <div class="card-header">Movies</div>
-            <app-list [url]="this.url" [headers]="this.headers" [title]="this.title" [objectKeys]="this.objectKeys"></app-list>
+            <div class="col-md-6 offset-md-3" style="margin-top: 10px; margin-bottom: 10px;">
+              <app-form [fields]="this.fields" [url]="this.url" [id]="this.id"></app-form>
+            </div>
         </div>
       </div>
     </div>
     <!-- /#page-content-wrapper -->
 
   </div>
-
