@@ -1,10 +1,10 @@
 class GenresController < ApplicationController
     def admin
-        genres = Genre.order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
+        genres = Genre.select(:id, :genre_name).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
             data: {
-                genres: genres
+                items: genres
             }
         }, status: 200
     end

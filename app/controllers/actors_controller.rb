@@ -1,10 +1,10 @@
 class ActorsController < ApplicationController
     def admin
-        actors = Actor.order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
+        actors = Actor.select(:id, :name, :surname).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
             data: {
-                actors: actors
+                items: actors
             }
         }, status: 200
     end

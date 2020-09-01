@@ -9,46 +9,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./jrimagenres.component.css']
 })
 export class JrimagenresComponent implements OnInit {
-  genres: [];
-  page = 1;
-  hasNextPage = false;
+  url = 'admin/genres';
+  title = 'Genres';
+  headers = ['Genre Name'];
+  objectKeys = ['id', 'genre_name'];
 
-  constructor(public tokenAuthService: Angular2TokenService, private toastr: ToastrService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getGenres(this.page);
   }
 
-  getPage(page) {
-    this.page = page;
-    this.getGenres(this.page);
-  }
-
-  getGenres(page) {
-    this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('admin/genres?page='+page).subscribe(
-      res => {
-        if (res.status == 200){
-          let genres = res.json().data.genres;
-          this.hasNextPage = genres.length > 10;
-          this.genres = genres.slice(0, 10);
-        }
-      }
-    );
-  }
-
-  deleteGenre(id) {
-    this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.delete('admin/genre/'+id).subscribe(
-      res => {
-        if (res.status == 200){
-          this.getGenres(this.page);
-          this.toastr.success('Action successful!', '', {positionClass: 'toast-bottom-right'});
-        } else {
-          this.toastr.error('Something went wrong', '', {positionClass: 'toast-bottom-right'});
-        }
-      }
-    );
-  }
 
 }

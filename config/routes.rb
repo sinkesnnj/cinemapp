@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   delete '/admin/categorie/:id', to: 'categories#destroy'
 
   get '/admin/genres', to: 'genres#admin'
-  delete '/admin/genre/:id', to: 'genres#destroy'
+  delete '/admin/genres/:id', to: 'genres#destroy'
 
   get '/admin/news', to: 'news#admin'
   delete '/admin/news/:id', to: 'news#destroy'

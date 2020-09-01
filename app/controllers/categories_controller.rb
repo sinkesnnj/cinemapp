@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
         render json: {
             data: {
-                categories: categories
+                items: categories
             }
         }, status: 200
     end

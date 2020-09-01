@@ -49,9 +49,10 @@ export class ListComponent implements OnInit {
         if (res.status == 200){
           this.getItems(this.page);
           this.toastr.success('Action successful!', '', {positionClass: 'toast-bottom-right'});
-        } else {
-          this.toastr.error('Something went wrong', '', {positionClass: 'toast-bottom-right'});
         }
+      },
+      error => {
+        this.toastr.error('Something went wrong', '', {positionClass: 'toast-bottom-right'});
       }
     );
   }

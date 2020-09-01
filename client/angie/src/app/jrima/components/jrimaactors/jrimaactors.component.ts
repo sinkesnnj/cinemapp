@@ -8,23 +8,14 @@ import { Angular2TokenService } from 'angular2-token';
   styleUrls: ['./jrimaactors.component.css']
 })
 export class JrimaactorsComponent implements OnInit {
-  actors: [];
-  page = 1;
-  hasNextPage = false;
+  url = 'admin/actors';
+  title = 'Actors';
+  headers = ['Actor Name', 'Actor Surname'];
+  objectKeys = ['id', 'name', 'surname'];
 
-  constructor(public tokenAuthService: Angular2TokenService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('admin/actors?page='+this.page).subscribe(
-      res => {
-        if (res.status == 200){
-          let actors = res.json().data.actors;
-          this.hasNextPage = actors.length > 10;
-          this.actors = actors.slice(0, 10);
-        }
-      }
-    );
   }
 
 }

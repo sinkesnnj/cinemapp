@@ -67,8 +67,14 @@ export class JrimaEditMoviesComponent implements OnInit {
       templateOptions: {
         label: 'Rating',
         placeholder: 'Rating',
+        pattern: /([12345]{1})/,
         required: false,
-      }
+      },
+      validation: {
+        messages: {
+          pattern: (error, field: FormlyFieldConfig) => `"${field.formControl.value}" is not a valid rating, please specifie something between 1 and 5`,
+        },
+      },
     }
   ];
   url = 'admin/movies';
