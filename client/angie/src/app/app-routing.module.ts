@@ -35,6 +35,7 @@ import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jri
 import { JrimaEditShowtimeUsersComponent } from './jrima/components/jrima-edit-showtime-users/jrima-edit-showtime-users.component';
 import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showtimes/jrima-edit-showtimes.component';
 import { JrimaEditTheatresComponent } from './jrima/components/jrima-edit-theatres/jrima-edit-theatres.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'news', component: NewsComponent },
   { path: 'news/:id', component: NewsDetailComponent },
   { path: 'sign_in', component: SessionComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'admin/movies', component: JrimamovieComponent, canActivate: [AuthGuard]},
   { path: 'admin/movies/new', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},
   { path: 'admin/movies/:id', component: JrimaEditMoviesComponent, canActivate: [AuthGuard]},

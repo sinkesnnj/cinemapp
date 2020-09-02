@@ -53,6 +53,7 @@ import { JrimaEditTheatresComponent } from './jrima/components/jrima-edit-theatr
 import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showtimes/jrima-edit-showtimes.component';
 import { JrimaEditShowtimeUsersComponent } from './jrima/components/jrima-edit-showtime-users/jrima-edit-showtime-users.component';
 import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jrima-edit-roles.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jri
     JrimaEditTheatresComponent,
     JrimaEditShowtimesComponent,
     JrimaEditShowtimeUsersComponent,
-    JrimaEditRolesComponent
+    JrimaEditRolesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

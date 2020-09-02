@@ -2,12 +2,29 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
 
     def my_account
+        user = User.select(:id, :name, :nickname, :email, :image).where(id: current_user.id).first
+
         render json: {
             data: {
-                message: "Welcome #{current_user.name}",
-                user: current_user
+                user: user
             }
         }, status: 200
+    end
+
+    def update_my_account
+        user = User.find(current_user.id)
+        if user.present?
+            user.name = params[:name] if params.key?(:name)
+            user.email = params[:email] if params.key?(:email)
+            user.nickname = params[:nickname] if params.key?(:nickname)
+            user.image = params[:image] if params.key?(:image)
+
+            status = user.save ? 200 : 400
+        else
+            status = 400
+        end
+
+        render json: {}, status: status
     end
 
     def admin
