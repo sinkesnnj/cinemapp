@@ -2,6 +2,8 @@ class GenresController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
+        return unless is_admin?
+
         genres = Genre.select(:id, :genre_name).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -12,6 +14,8 @@ class GenresController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         genre = Genre.find(params[:id])
         status = 400
         status = 200 if genre.present? && genre.destroy
@@ -20,6 +24,8 @@ class GenresController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         genre = Genre.new(params.permit!.except(:controller, :action))
         status = genre.save ? 200 : 400
 
@@ -27,6 +33,8 @@ class GenresController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         genre = Genre.find(params[:id])
 
         render json: {
@@ -37,6 +45,8 @@ class GenresController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         genre = Genre.find(params[:id])
         if genre.present?
             genre.genre_name = params[:genre_name] if params.key?(:genre_name)

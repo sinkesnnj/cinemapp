@@ -2,6 +2,8 @@ class NewsCategoriesController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
+        return unless is_admin?
+
         sql_query = "SELECT nc.id, n.title AS news_title, c.title AS categorie_title
             FROM news_categories nc
                 JOIN news n ON nc.news_id = n.id
@@ -21,6 +23,8 @@ class NewsCategoriesController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         news_categorie = NewsCategorie.find(params[:id])
         status = 400
         status = 200 if news_categorie.present? && news_categorie.destroy
@@ -29,6 +33,8 @@ class NewsCategoriesController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         if News.find(params[:news_id]).blank? || Categorie.find(params[:categorie_id]).blank?
             status = 400
         else
@@ -40,6 +46,8 @@ class NewsCategoriesController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         news_categorie = NewsCategorie.find(params[:id])
 
         render json: {
@@ -50,6 +58,8 @@ class NewsCategoriesController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         news_categorie = NewsCategorie.find(params[:id])
         if news_categorie.present? && News.find(params[:news_id]).present? && Categorie.find(params[:categorie_id]).present?
             news_categorie.news_id = params[:news_id] if params.key?(:news_id)

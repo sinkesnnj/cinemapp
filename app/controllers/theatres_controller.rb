@@ -12,6 +12,8 @@ class TheatresController < ApplicationController
     end
 
     def admin
+        return unless is_admin?
+
         theatres = Theatre.select(:id, :name, :seating_capacity).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -22,6 +24,8 @@ class TheatresController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         theatre = Theatre.find(params[:id])
         status = 400
         status = 200 if theatre.present? && theatre.destroy
@@ -30,6 +34,8 @@ class TheatresController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         theatre = Theatre.new(params.permit!.except(:controller, :action))
         status = theatre.save ? 200 : 400
 
@@ -37,6 +43,8 @@ class TheatresController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         theatre = Theatre.find(params[:id])
 
         render json: {
@@ -47,6 +55,8 @@ class TheatresController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         theatre = Theatre.find(params[:id])
         if theatre.present?
             theatre.name = params[:name] if params.key?(:name)

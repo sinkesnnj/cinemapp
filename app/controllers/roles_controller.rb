@@ -2,6 +2,8 @@ class RolesController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
+        return unless is_admin?
+
         roles = Role.select(:id, :role_type).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -12,6 +14,8 @@ class RolesController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         role = Role.find(params[:id])
         status = 400
         status = 200 if role.present? && role.destroy
@@ -20,6 +24,8 @@ class RolesController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         role = Role.new(params.permit!.except(:controller, :action))
         status = role.save ? 200 : 400
 
@@ -27,6 +33,8 @@ class RolesController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         role = Role.find(params[:id])
 
         render json: {
@@ -37,6 +45,8 @@ class RolesController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         role = Role.find(params[:id])
         if role.present?
             role.role_type = params[:role_type] if params.key?(:role_type)

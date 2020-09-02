@@ -25,6 +25,7 @@ import { SearchComponent } from './components/search/search.component';
 import { JrimamovieComponent } from './jrima/components/jrimamovie/jrimamovie.component';
 import { JrimaactorsComponent } from './jrima/components/jrimaactors/jrimaactors.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
 import { JrimacategoriesComponent } from './jrima/components/jrimacategories/jrimacategories.component';
 import { JrimagenresComponent } from './jrima/components/jrimagenres/jrimagenres.component';
 import { JrimanewsComponent } from './jrima/components/jrimanews/jrimanews.component';
@@ -115,7 +116,8 @@ import { ProfileComponent } from './modules/profile/profile.component';
   providers: [
     StateService,
     Angular2TokenService,
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

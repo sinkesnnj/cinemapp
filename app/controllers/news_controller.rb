@@ -52,6 +52,8 @@ class NewsController < ApplicationController
     end
 
     def admin
+        return unless is_admin?
+
         news = News.select(:id, :title, :release_date, :short_description).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -62,6 +64,8 @@ class NewsController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         news = News.find(params[:id])
         status = 400
         status = 200 if news.present? && news.destroy
@@ -70,6 +74,8 @@ class NewsController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         news = News.new(params.permit!.except(:controller, :action))
         status = news.save ? 200 : 400
 
@@ -77,6 +83,8 @@ class NewsController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         news = News.find(params[:id])
 
         render json: {
@@ -87,6 +95,8 @@ class NewsController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         news = News.find(params[:id])
         if news.present?
             news.title = params[:title] if params.key?(:title)

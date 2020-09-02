@@ -2,6 +2,8 @@ class MovieActorsController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
+        return unless is_admin?
+
         sql_query = "SELECT ma.id, m.name AS movie_name, a.name AS actor_name, ma.character_name AS character_name
             FROM movie_actors ma
                 JOIN movies m ON ma.movie_id = m.id
@@ -21,6 +23,8 @@ class MovieActorsController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+        
         movie_actor = MovieActor.find(params[:id])
         status = 400
         status = 200 if movie_actor.present? && movie_actor.destroy
@@ -29,6 +33,8 @@ class MovieActorsController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         if Movie.find(params[:movie_id]).blank? || Actor.find(params[:actor_id]).blank?
             status = 400
         else
@@ -40,6 +46,8 @@ class MovieActorsController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         movie_actor = MovieActor.find(params[:id])
 
         render json: {
@@ -50,6 +58,8 @@ class MovieActorsController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         movie_actor = MovieActor.find(params[:id])
         if movie_actor.present?
             movie_actor.movie_id = params[:movie_id] if params.key?(:movie_id)

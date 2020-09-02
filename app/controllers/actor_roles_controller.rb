@@ -2,6 +2,8 @@ class ActorRolesController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
+        return unless is_admin?
+
         sql_query = "SELECT ar.id, a.name AS actor_name, r.role_type AS role_type
             FROM actor_roles ar
                 JOIN actors a ON ar.actor_id = a.id
@@ -21,6 +23,8 @@ class ActorRolesController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         actor_role = ActorRole.find(params[:id])
         status = 400
         status = 200 if actor_role.present? && actor_role.destroy
@@ -29,6 +33,8 @@ class ActorRolesController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         if Actor.find(params[:actor_id]).blank? || Role.find(params[:role_id]).blank?
             status = 400
         else
@@ -40,6 +46,8 @@ class ActorRolesController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         actor_role = ActorRole.find(params[:id])
 
         render json: {
@@ -50,6 +58,8 @@ class ActorRolesController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         actor_role = ActorRole.find(params[:id])
         if actor_role.present?
             actor_role.role_id = params[:role_id] if params.key?(:role_id)

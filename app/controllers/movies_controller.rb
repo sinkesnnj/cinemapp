@@ -32,6 +32,8 @@ class MoviesController < ApplicationController
     end
 
     def admin
+        return unless is_admin?
+        
         movies = Movie.select('id', 'name', 'release_date', 'run_time', 'rating').order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -42,6 +44,8 @@ class MoviesController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         movie = Movie.find(params[:id])
         status = 400
         status = 200 if movie.present? && movie.destroy
@@ -50,6 +54,8 @@ class MoviesController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         movie = Movie.new(params.permit!.except(:controller, :action))
         status = movie.save ? 200 : 400
 
@@ -57,6 +63,8 @@ class MoviesController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         movie = Movie.find(params[:id])
 
         render json: {
@@ -67,6 +75,8 @@ class MoviesController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+
         movie = Movie.find(params[:id])
         if movie.present?
             movie.name = params[:name] if params.key?(:name)

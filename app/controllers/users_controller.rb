@@ -3,10 +3,13 @@ class UsersController < ApplicationController
 
     def my_account
         user = User.select(:id, :name, :nickname, :email, :image).where(id: current_user.id).first
+        user_permission = UserPermission.where(user_id: current_user.id).order(permission_id: :desc).first
+        permission = Permission.select(:id, :name).where(id: user_permission.permission_id)
 
         render json: {
             data: {
-                user: user
+                user: user,
+                permission: permission
             }
         }, status: 200
     end
@@ -28,6 +31,8 @@ class UsersController < ApplicationController
     end
 
     def admin
+        return unless is_admin?
+
         users = User.select(:id, :name, :email, :nickname).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
@@ -38,6 +43,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
+        return unless is_admin?
+
         user = User.find(params[:id])
         status = 400
         status = 200 if users.present? && users.destroy
@@ -46,6 +53,8 @@ class UsersController < ApplicationController
     end
 
     def create
+        return unless is_admin?
+
         user = User.new(params.permit!.except(:controller, :action))
         status = user.save ? 200 : 400
 
@@ -54,6 +63,8 @@ class UsersController < ApplicationController
     end
 
     def edit
+        return unless is_admin?
+
         user = User.find(params[:id])
 
         render json: {
@@ -64,6 +75,8 @@ class UsersController < ApplicationController
     end
 
     def update
+        return unless is_admin?
+        
         user = User.find(params[:id])
         if user.present?
             user.name = params[:name] if params.key?(:name)
