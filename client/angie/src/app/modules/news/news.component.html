@@ -6,8 +6,7 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
+        <h1 class="my-4">Latest News
         </h1>
 
         <div *ngIf="news.length < 1">
@@ -29,11 +28,13 @@
 
         <!-- Pagination -->
         <ul class="pagination justify-content-center mb-4">
-          <li class="page-item disabled">
-            <a class="page-link" href="#">&larr; Newer</a>
+          <li class="page-item" [ngClass]="{'disabled': page < 2}">
+            <span *ngIf="page < 2" class="page-link">&larr; Newer</span>
+            <button *ngIf="page > 1" class="page-link" (click)="this.getPage(page -1)">&larr; Newer</button>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Older &rarr;</a>
+          <li class="page-item" [ngClass]="{'disabled': !this.hasNextPage}">
+              <span *ngIf="!this.hasNextPage" class="page-link">Older &rarr;</span>
+              <button *ngIf="this.hasNextPage" class="page-link"  (click)="this.getPage(page +1)">Older &rarr;</button>
           </li>
         </ul>
 

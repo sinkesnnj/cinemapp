@@ -10,15 +10,28 @@ import { StateService } from 'src/app/core/services/state.service';
 })
 export class DashboardComponent implements OnInit {
   movies = [];
+  page = 1;
+  hasNextPage = false;
 
   constructor(public tokenAuthService: Angular2TokenService, public stateService: StateService) { }
 
   ngOnInit(): void {
+    this.getItems(this.page);
+  }
+
+  getPage(page) {
+    this.page = page;
+    this.getItems(this.page);
+  }
+
+  getItems(page) {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('movies/dashboard').subscribe(
+    this.tokenAuthService.get('movies/dashboard?page='+page).subscribe(
       res => {
         if (res.status == 200){
-          this.movies = res.json().data.movies;
+          let movies = res.json().data.movies;
+          this.hasNextPage = movies.length > 6;
+          this.movies = movies.slice(0, 6);
         }
       }
     );

@@ -34,7 +34,7 @@ export class JrimaEditMovieActorsComponent implements OnInit {
       }
     },
     {
-      key: 'character_namem',
+      key: 'character_name',
       type: 'input',
       templateOptions: {
         label: 'Character name',

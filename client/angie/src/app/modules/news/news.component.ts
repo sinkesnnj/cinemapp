@@ -11,8 +11,10 @@ import { RequestOptions } from '@angular/http';
 })
 export class NewsComponent implements OnInit {
   news = [];
-  search = '';
+  search = null;
   filter = null;
+  page = 1;
+  hasNextPage = false;
 
   constructor(public tokenAuthService: Angular2TokenService, public stateService: StateService) {
     this.stateService.search.subscribe(value => {
@@ -27,11 +29,27 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getItems(this.page);
+  }
+
+  getPage(page) {
+    this.page = page;
+    if (this.search !== null && this.search !== undefined && this.search !== '')
+      this.startSearch();
+    else if (this.filter !== null && this.filter !== undefined && this.filter !== '')
+      this.startFilter();
+    else
+      this.getItems(this.page);
+  }
+
+  getItems(page) {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('news/index').subscribe(
+    this.tokenAuthService.get('news/index?page='+page).subscribe(
       res => {
         if (res.status == 200){
-          this.news = res.json().data.news;
+          let news = res.json().data.news;
+          this.hasNextPage = news.length > 3;
+          this.news = news.slice(0, 3);
         }
       }
     );
@@ -39,10 +57,12 @@ export class NewsComponent implements OnInit {
 
   startSearch(): void {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('news/index?search='+this.search).subscribe(
+    this.tokenAuthService.get('news/index?page='+this.page+'&search='+this.search).subscribe(
       res => {
         if (res.status == 200){
-          this.news = res.json().data.news;
+          let news = res.json().data.news;
+          this.hasNextPage = news.length > 3;
+          this.news = news.slice(0, 3);
         }
       }
     );
@@ -50,10 +70,12 @@ export class NewsComponent implements OnInit {
 
   startFilter(): void {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('news/index?filter='+this.filter).subscribe(
+    this.tokenAuthService.get('news/index?page='+this.page+'&filter='+this.filter).subscribe(
       res => {
         if (res.status == 200){
-          this.news = res.json().data.news;
+          let news = res.json().data.news;
+          this.hasNextPage = news.length > 3;
+          this.news = news.slice(0, 3);
         }
       }
     );

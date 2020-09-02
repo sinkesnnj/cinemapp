@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_08_31_194659) do
   create_table "movie_actors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "movie_id", null: false
     t.integer "actor_id", null: false
-    t.string "character_namem", null: false
+    t.string "character_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

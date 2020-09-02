@@ -13,13 +13,13 @@ class NewsController < ApplicationController
 
     def index
         if params[:search].present?
-            news = News.where('title LIKE :search', search: "%#{params[:search]}%").limit(3)
+            news = News.where('title LIKE :search', search: "%#{params[:search]}%").offset((params[:page].to_i-1)*3).limit(4)
         elsif params[:filter].present?
             news_categories = NewsCategorie.where(categorie_id: params[:filter])
             news_categories = news_categories.map(&:news_id)
-            news = News.where(id: news_categories).limit(3)
+            news = News.where(id: news_categories).offset((params[:page].to_i-1)*3).limit(4)
         else
-            news = News.select(:id, :title, :short_description, :poster_path, :updated_at).order(created_at: :desc).limit(3)
+            news = News.select(:id, :title, :short_description, :poster_path, :updated_at).order(created_at: :desc).offset((params[:page].to_i-1)*3).limit(4)
         end
 
         render json: {
@@ -40,7 +40,9 @@ class NewsController < ApplicationController
     end
 
     def categories
-        most_popular = Categorie.order(Arel.sql('RAND()')).limit(6)
+        nc = NewsCategorie.find_by_sql(["SELECT categorie_id, COUNT(*) FROM news_categories GROUP BY categorie_id ORDER BY COUNT(*) DESC;", {}])
+        most_popular = Categorie.where(id: nc.map(&:categorie_id)).limit(6)
+        most_popular += Categorie.where.not(id: nc.map(&:categorie_id)).limit(6 - most_popular.size) if most_popular.size < 6
 
         render json: {
             data: {

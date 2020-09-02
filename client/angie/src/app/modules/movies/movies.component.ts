@@ -9,15 +9,28 @@ import { environment } from 'src/environments/environment';
 })
 export class MoviesComponent implements OnInit {
   movies = [];
+  page = 1;
+  hasNextPage = false;
 
   constructor(public tokenAuthService: Angular2TokenService) { }
 
   ngOnInit(): void {
+    this.getItems(this.page);
+  }
+
+  getPage(page) {
+    this.page = page;
+    this.getItems(this.page);
+  }
+
+  getItems(page) {
     this.tokenAuthService.init(environment.token_auth_config);
-    this.tokenAuthService.get('movies/index').subscribe(
+    this.tokenAuthService.get('movies/index?page='+page).subscribe(
       res => {
         if (res.status == 200){
-          this.movies = res.json().data.movies;
+          let movies = res.json().data.movies;
+          this.hasNextPage = movies.length > 4;
+          this.movies = movies.slice(0, 4);
         }
       }
     );

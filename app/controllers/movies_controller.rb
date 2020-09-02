@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def dashboard
-        movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).limit(6)
+        movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).offset((params[:page].to_i-1)*6).limit(7)
 
         render json: {
             data: {
@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     end
 
     def index
-        movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).limit(4)
+        movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).offset((params[:page].to_i-1)*4).limit(5)
 
         render json: {
             data: {

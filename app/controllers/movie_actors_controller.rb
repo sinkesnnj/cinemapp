@@ -2,7 +2,7 @@ class MovieActorsController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
     def admin
-        sql_query = "SELECT ma.id, m.name AS movie_name, a.name AS actor_name, ma.character_namem AS character_name
+        sql_query = "SELECT ma.id, m.name AS movie_name, a.name AS actor_name, ma.character_name AS character_name
             FROM movie_actors ma
                 JOIN movies m ON ma.movie_id = m.id
                 JOIN actors a ON ma.actor_id = a.id
@@ -54,7 +54,7 @@ class MovieActorsController < ApplicationController
         if movie_actor.present?
             movie_actor.movie_id = params[:movie_id] if params.key?(:movie_id)
             movie_actor.actor_id = params[:actor_id] if params.key?(:actor_id)
-            movie_actor.character_namem = params[:character_namem] if params.key?(:character_namem)
+            movie_actor.character_name = params[:character_name] if params.key?(:character_name)
 
             status = movie_actor.save ? 200 : 400
         else
