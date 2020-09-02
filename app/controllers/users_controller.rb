@@ -21,7 +21,6 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         user = User.find(params[:id])
         status = 400
         status = 200 if users.present? && users.destroy

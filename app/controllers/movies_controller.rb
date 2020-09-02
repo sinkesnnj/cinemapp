@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def dashboard
         movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).limit(6)
 
@@ -40,7 +42,6 @@ class MoviesController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         movie = Movie.find(params[:id])
         status = 400
         status = 200 if movie.present? && movie.destroy

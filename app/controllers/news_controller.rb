@@ -1,4 +1,6 @@
 class NewsController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def carousel
         news = News.select(:id, :title, :short_description, :poster_path).order(created_at: :desc).limit(3)
 
@@ -58,7 +60,6 @@ class NewsController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         news = News.find(params[:id])
         status = 400
         status = 200 if news.present? && news.destroy

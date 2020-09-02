@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         roles = Role.select(:id, :role_type).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
@@ -10,7 +12,6 @@ class RolesController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         role = Role.find(params[:id])
         status = 400
         status = 200 if role.present? && role.destroy

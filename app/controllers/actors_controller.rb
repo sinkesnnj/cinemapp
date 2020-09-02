@@ -1,4 +1,6 @@
 class ActorsController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         actors = Actor.select(:id, :name, :surname).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
@@ -10,7 +12,6 @@ class ActorsController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         actor = Actor.find(params[:id])
         status = 400
         status = 200 if actor.present? && actor.destroy

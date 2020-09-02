@@ -1,4 +1,6 @@
 class GenresController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         genres = Genre.select(:id, :genre_name).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
@@ -10,7 +12,6 @@ class GenresController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         genre = Genre.find(params[:id])
         status = 400
         status = 200 if genre.present? && genre.destroy

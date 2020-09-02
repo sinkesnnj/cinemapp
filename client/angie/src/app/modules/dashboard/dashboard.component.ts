@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from 'src/environments/environment';
+import { StateService } from 'src/app/core/services/state.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
   movies = [];
 
-  constructor(public tokenAuthService: Angular2TokenService) { }
+  constructor(public tokenAuthService: Angular2TokenService, public stateService: StateService) { }
 
   ngOnInit(): void {
     this.tokenAuthService.init(environment.token_auth_config);

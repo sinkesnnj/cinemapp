@@ -1,4 +1,6 @@
 class ActorRolesController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         sql_query = "SELECT ar.id, a.name AS actor_name, r.role_type AS role_type
             FROM actor_roles ar
@@ -19,7 +21,6 @@ class ActorRolesController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         actor_role = ActorRole.find(params[:id])
         status = 400
         status = 200 if actor_role.present? && actor_role.destroy

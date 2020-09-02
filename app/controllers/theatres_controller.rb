@@ -1,4 +1,6 @@
 class TheatresController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def index
         theatres = Theatre.select(:name, :description, :image_path, :updated_at).order(created_at: :desc)
 
@@ -20,7 +22,6 @@ class TheatresController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         theatre = Theatre.find(params[:id])
         status = 400
         status = 200 if theatre.present? && theatre.destroy

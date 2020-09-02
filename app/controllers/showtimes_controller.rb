@@ -1,4 +1,6 @@
 class ShowtimesController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         sql_query = "SELECT s.id, m.name AS movie_name, t.name AS theatre_name, s.projection_date, TIME_FORMAT(s.projection_time, '%H:%i') AS projection_time
             FROM showtimes s
@@ -19,7 +21,6 @@ class ShowtimesController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         showtime = Showtime.find(params[:id])
         status = 400
         status = 200 if showtime.present? && showtime.destroy

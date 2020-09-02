@@ -1,4 +1,6 @@
 class MovieActorsController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         sql_query = "SELECT ma.id, m.name AS movie_name, a.name AS actor_name, ma.character_namem AS character_name
             FROM movie_actors ma
@@ -19,7 +21,6 @@ class MovieActorsController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         movie_actor = MovieActor.find(params[:id])
         status = 400
         status = 200 if movie_actor.present? && movie_actor.destroy

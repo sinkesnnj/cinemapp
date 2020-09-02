@@ -1,4 +1,6 @@
 class NewsCategoriesController < ApplicationController
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+
     def admin
         sql_query = "SELECT nc.id, n.title AS news_title, c.title AS categorie_title
             FROM news_categories nc
@@ -19,7 +21,6 @@ class NewsCategoriesController < ApplicationController
     end
 
     def destroy
-        # TODO: Authorization
         news_categorie = NewsCategorie.find(params[:id])
         status = 400
         status = 200 if news_categorie.present? && news_categorie.destroy
