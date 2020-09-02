@@ -6,8 +6,8 @@ class ShowtimesController < ApplicationController
 
         sql_query = "SELECT s.id, m.name AS movie_name, t.name AS theatre_name, s.projection_date, TIME_FORMAT(s.projection_time, '%H:%i') AS projection_time
             FROM showtimes s
-                JOIN movies m ON s.movie_id = m.id
-                JOIN theatres t ON s.theatre_id = t.id
+                LEFT JOIN movies m ON s.movie_id = m.id
+                LEFT JOIN theatres t ON s.theatre_id = t.id
             ORDER BY s.created_at DESC
             LIMIT 11
             OFFSET :offset"

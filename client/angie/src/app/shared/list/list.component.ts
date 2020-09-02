@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
   @Input() title: string;
   @Input() headers: Array<string>;
   @Input() objectKeys: Array<string>;
+  @Input() dateFormats: any;
   items: [];
   page = 1;
   hasNextPage = false;

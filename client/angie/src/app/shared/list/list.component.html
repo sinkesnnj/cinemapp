@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of items">
-                    <td *ngFor="let one of objectKeys">{{item[one]}}</td>
+                    <td *ngFor="let one of objectKeys">{{dateFormats[one] ? (item[one] | date:dateFormats[one]:'UTC') : item[one]}}</td>
                     <td align="right">
                         <button class="btn btn-primary a-btn-slide-text button-do-action" (click)="this.editItem(this.item.id)">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

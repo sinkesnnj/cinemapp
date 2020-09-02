@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +24,6 @@ export class FormComponent implements OnInit {
   };
 
   constructor(public router: Router, public tokenAuthService: Angular2TokenService, private toastr: ToastrService) { 
-    
   }
 
   ngOnInit() {
@@ -35,7 +35,10 @@ export class FormComponent implements OnInit {
     this.tokenAuthService.get(this.url + '/' + this.id).subscribe(
       res => {
         if (res.status == 200){
-          this.model = res.json().data.model;
+          let model = res.json().data.model;
+          if (this.url == 'admin/showtimes')
+            model = this.formatTime(model);
+          this.model = model;
         }
       }
     );
@@ -47,6 +50,12 @@ export class FormComponent implements OnInit {
     } else {
       this.updateObject();
     }
+  }
+
+  formatTime(model): any{
+    debugger;
+    model.projection_time = formatDate(model.projection_time, 'HH:mm', 'en-US', 'UTC');
+    return model
   }
 
   onCancel(){

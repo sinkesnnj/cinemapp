@@ -11,6 +11,7 @@ export class JrimashowtimesComponent implements OnInit {
   title = 'Showtimes';
   headers = ['Movie Name', 'Theatre Name', 'Projection Date', 'Projection Time'];
   objectKeys = ['id', 'movie_name', 'theatre_name', 'projection_date', 'projection_time'];
+  dateFormats = {'projection_date': 'fullDate', 'projection_time': 'HH:mm'}
 
   constructor() { }
 
