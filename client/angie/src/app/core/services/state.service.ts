@@ -37,7 +37,7 @@ export class StateService {
             if (res.status == 200){
               this.cinemaUser = new User().deserialize(res.json().data.user);
               this.cinemaUser = this.cinemaUser[0];
-              this.role = new Role().deserialize(res.json().data.permission);
+              this.role = new Role().deserialize(res.json().data.role);
               this.role = this.role[0];
             }
           }

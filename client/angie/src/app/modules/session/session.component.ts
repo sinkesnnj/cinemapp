@@ -52,7 +52,7 @@ export class SessionComponent implements OnInit {
         if (res.status == 200){
           this.stateService.cinemaUser = new User().deserialize(res.json().data.user);
           this.stateService.cinemaUser = this.stateService.cinemaUser[0];
-          this.stateService.role = new Role().deserialize(res.json().data.permission);
+          this.stateService.role = new Role().deserialize(res.json().data.role);
           this.stateService.role = this.stateService.role[0];
           this.toastr.success('Successfully loged in!', '', {positionClass: 'toast-bottom-right'});
           this.router.navigate(['/dashboard']);

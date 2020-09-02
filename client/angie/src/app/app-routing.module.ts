@@ -21,11 +21,11 @@ import { JrimaShowtimeUsersComponent } from './jrima/components/jrima-showtime-u
 import { JrimaRolesComponent } from './jrima/components/jrima-roles/jrima-roles.component';
 import { JrimaNewsCategoriesComponent } from './jrima/components/jrima-news-categories/jrima-news-categories.component';
 import { JrimaMovieActorsComponent } from './jrima/components/jrima-movie-actors/jrima-movie-actors.component';
-import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/jrima-actor-roles.component';
+import { JrimaUserRolesComponent } from './jrima/components/jrima-user-roles/jrima-user-roles.component';
 import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
 import { JrimaEditMovieActorsComponent } from './jrima/components/jrima-edit-movie-actors/jrima-edit-movie-actors.component';
 import { JrimaEditActorsComponent } from './jrima/components/jrima-edit-actors/jrima-edit-actors.component';
-import { JrimaEditActorRolesComponent } from './jrima/components/jrima-edit-actor-roles/jrima-edit-actor-roles.component';
+import { JrimaEditUserRolesComponent } from './jrima/components/jrima-edit-user-roles/jrima-edit-user-roles.component';
 import { JrimaEditCategoriesComponent } from './jrima/components/jrima-edit-categories/jrima-edit-categories.component';
 import { JrimaEditGenresComponent } from './jrima/components/jrima-edit-genres/jrima-edit-genres.component';
 import { JrimaEditNewsComponent } from './jrima/components/jrima-edit-news/jrima-edit-news.component';
@@ -37,6 +37,8 @@ import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showt
 import { JrimaEditTheatresComponent } from './jrima/components/jrima-edit-theatres/jrima-edit-theatres.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { AdminGuard } from './shared/guards/admin.guard';
+import { JrimaEditMovieGenresComponent } from './jrima/components/jrima-edit-movie-genres/jrima-edit-movie-genres.component';
+import { JrimaMovieGenresComponent } from './jrima/components/jrima-movie-genres/jrima-movie-genres.component';
 
 
 const routes: Routes = [
@@ -85,9 +87,12 @@ const routes: Routes = [
   { path: 'admin/movie_actors', component: JrimaMovieActorsComponent, canActivate: [AuthGuard, AdminGuard]},
   { path: 'admin/movie_actors/new', component: JrimaEditMovieActorsComponent, canActivate: [AuthGuard, AdminGuard]},
   { path: 'admin/movie_actors/:id', component: JrimaEditMovieActorsComponent, canActivate: [AuthGuard, AdminGuard]},
-  { path: 'admin/actor_roles', component: JrimaActorRolesComponent, canActivate: [AuthGuard, AdminGuard]},
-  { path: 'admin/actor_roles/new', component: JrimaEditActorRolesComponent, canActivate: [AuthGuard, AdminGuard]},
-  { path: 'admin/actor_roles/:id', component: JrimaEditActorRolesComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/movie_genres', component: JrimaMovieGenresComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/movie_genres/new', component: JrimaEditMovieGenresComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/movie_genres/:id', component: JrimaEditMovieGenresComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/user_roles', component: JrimaUserRolesComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/user_roles/new', component: JrimaEditUserRolesComponent, canActivate: [AuthGuard, AdminGuard]},
+  { path: 'admin/user_roles/:id', component: JrimaEditUserRolesComponent, canActivate: [AuthGuard, AdminGuard]},
 ];
 
 @NgModule({

@@ -4,7 +4,7 @@ class RolesController < ApplicationController
     def admin
         return unless is_admin?
 
-        roles = Role.select(:id, :role_type).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
+        roles = Role.select(:id, :name).order(created_at: :desc).offset((params[:page].to_i-1)*10).limit(11)
 
         render json: {
             data: {
@@ -49,7 +49,7 @@ class RolesController < ApplicationController
         
         role = Role.find(params[:id])
         if role.present?
-            role.role_type = params[:role_type] if params.key?(:role_type)
+            role.name = params[:name] if params.key?(:name)
 
             status = role.save ? 200 : 400
         else

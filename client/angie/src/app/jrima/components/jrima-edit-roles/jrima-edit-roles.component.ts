@@ -15,11 +15,11 @@ export class JrimaEditRolesComponent implements OnInit {
 
   fields: FormlyFieldConfig[] = [
     {
-      key: 'role_type',
+      key: 'name',
       type: 'input',
       templateOptions: {
-        label: 'Role Type',
-        placeholder: 'Role Type',
+        label: 'Role Name',
+        placeholder: 'Role Name',
         required: true,
       }
     }

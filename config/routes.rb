@@ -87,9 +87,15 @@ Rails.application.routes.draw do
   put '/admin/movie_actors/:id', to: 'movie_actors#update'
   delete '/admin/movie_actors/:id', to: 'movie_actors#destroy'
 
-  get '/admin/actor_roles', to: 'actor_roles#admin'
-  post '/admin/actor_roles/create', to: 'actor_roles#create'
-  get '/admin/actor_roles/:id', to: 'actor_roles#edit'
-  put '/admin/actor_roles/:id', to: 'actor_roles#update'
-  delete '/admin/actor_roles/:id', to: 'actor_roles#destroy'
+  get '/admin/user_roles', to: 'user_roles#admin'
+  post '/admin/user_roles/create', to: 'user_roles#create'
+  get '/admin/user_roles/:id', to: 'user_roles#edit'
+  put '/admin/user_roles/:id', to: 'user_roles#update'
+  delete '/admin/user_roles/:id', to: 'user_roles#destroy'
+
+  get '/admin/movie_genres', to: 'movie_genres#admin'
+  post '/admin/movie_genres/create', to: 'movie_genres#create'
+  get '/admin/movie_genres/:id', to: 'movie_genres#edit'
+  put '/admin/movie_genres/:id', to: 'movie_genres#update'
+  delete '/admin/movie_genres/:id', to: 'movie_genres#destroy'
 end

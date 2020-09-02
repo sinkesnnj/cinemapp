@@ -23,10 +23,14 @@ class MoviesController < ApplicationController
 
     def show
         movie = Movie.where(id: params[:id]).first
+        actors = Actor.find_by_sql(["SELECT a.id, a.name, a.surname FROM actors a JOIN movie_actors ma ON a.id = ma.actor_id WHERE ma.movie_id = :movie_id", {movie_id: movie.id}])
+        genre = Genre.find_by_sql(["SELECT DISTINCT g.genre_name FROM genres g JOIN movie_genres mg ON g.id = mg.genre_id WHERE mg.movie_id = :movie_id", {movie_id: movie.id}])
 
         render json: {
             data: {
-                movie: movie
+                movie: movie,
+                actors: actors,
+                genre: genre
             }
         }, status: 200
     end

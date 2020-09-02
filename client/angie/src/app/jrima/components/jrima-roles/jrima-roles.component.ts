@@ -10,7 +10,7 @@ export class JrimaRolesComponent implements OnInit {
   url = 'admin/roles';
   title = 'Roles';
   headers = ['Role Type'];
-  objectKeys = ['id', 'role_type'];
+  objectKeys = ['id', 'name'];
 
   constructor() { }
 

@@ -37,14 +37,14 @@ import { JrimaShowtimeUsersComponent } from './jrima/components/jrima-showtime-u
 import { JrimaRolesComponent } from './jrima/components/jrima-roles/jrima-roles.component';
 import { JrimaNewsCategoriesComponent } from './jrima/components/jrima-news-categories/jrima-news-categories.component';
 import { JrimaMovieActorsComponent } from './jrima/components/jrima-movie-actors/jrima-movie-actors.component';
-import { JrimaActorRolesComponent } from './jrima/components/jrima-actor-roles/jrima-actor-roles.component';
+import { JrimaUserRolesComponent } from './jrima/components/jrima-user-roles/jrima-user-roles.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { JrimaEditMoviesComponent } from './jrima/components/jrima-edit-movies/jrima-edit-movies.component';
 import { FormComponent } from './shared/form/form.component';
 import { JrimaEditMovieActorsComponent } from './jrima/components/jrima-edit-movie-actors/jrima-edit-movie-actors.component';
 import { JrimaEditActorsComponent } from './jrima/components/jrima-edit-actors/jrima-edit-actors.component';
-import { JrimaEditActorRolesComponent } from './jrima/components/jrima-edit-actor-roles/jrima-edit-actor-roles.component';
+import { JrimaEditUserRolesComponent } from './jrima/components/jrima-edit-user-roles/jrima-edit-user-roles.component';
 import { JrimaEditCategoriesComponent } from './jrima/components/jrima-edit-categories/jrima-edit-categories.component';
 import { JrimaEditGenresComponent } from './jrima/components/jrima-edit-genres/jrima-edit-genres.component';
 import { JrimaEditNewsComponent } from './jrima/components/jrima-edit-news/jrima-edit-news.component';
@@ -55,6 +55,8 @@ import { JrimaEditShowtimesComponent } from './jrima/components/jrima-edit-showt
 import { JrimaEditShowtimeUsersComponent } from './jrima/components/jrima-edit-showtime-users/jrima-edit-showtime-users.component';
 import { JrimaEditRolesComponent } from './jrima/components/jrima-edit-roles/jrima-edit-roles.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { JrimaMovieGenresComponent } from './jrima/components/jrima-movie-genres/jrima-movie-genres.component';
+import { JrimaEditMovieGenresComponent } from './jrima/components/jrima-edit-movie-genres/jrima-edit-movie-genres.component';
 
 @NgModule({
   declarations: [
@@ -83,12 +85,12 @@ import { ProfileComponent } from './modules/profile/profile.component';
     JrimaRolesComponent,
     JrimaNewsCategoriesComponent,
     JrimaMovieActorsComponent,
-    JrimaActorRolesComponent,
+    JrimaUserRolesComponent,
     JrimaEditMoviesComponent,
     FormComponent,
     JrimaEditMovieActorsComponent,
     JrimaEditActorsComponent,
-    JrimaEditActorRolesComponent,
+    JrimaEditUserRolesComponent,
     JrimaEditCategoriesComponent,
     JrimaEditGenresComponent,
     JrimaEditNewsComponent,
@@ -98,7 +100,9 @@ import { ProfileComponent } from './modules/profile/profile.component';
     JrimaEditShowtimesComponent,
     JrimaEditShowtimeUsersComponent,
     JrimaEditRolesComponent,
-    ProfileComponent
+    ProfileComponent,
+    JrimaMovieGenresComponent,
+    JrimaEditMovieGenresComponent
   ],
   imports: [
     BrowserModule,

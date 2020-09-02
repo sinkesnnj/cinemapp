@@ -3,13 +3,13 @@ class UsersController < ApplicationController
 
     def my_account
         user = User.select(:id, :name, :nickname, :email, :image).where(id: current_user.id).first
-        user_permission = UserPermission.where(user_id: current_user.id).order(permission_id: :desc).first
-        permission = Permission.select(:id, :name).where(id: user_permission.permission_id)
+        user_role = UserRole.where(user_id: current_user.id).order(role_id: :desc).first
+        role = Role.select(:id, :name).where(id: user_role.role_id)
 
         render json: {
             data: {
                 user: user,
-                permission: permission
+                role: role
             }
         }, status: 200
     end

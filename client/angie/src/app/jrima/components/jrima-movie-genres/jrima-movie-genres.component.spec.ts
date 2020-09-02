@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JrimaActorRolesComponent } from './jrima-actor-roles.component';
+import { JrimaMovieGenresComponent } from './jrima-movie-genres.component';
 
-describe('JrimaActorRolesComponent', () => {
-  let component: JrimaActorRolesComponent;
-  let fixture: ComponentFixture<JrimaActorRolesComponent>;
+describe('JrimaMovieGenresComponent', () => {
+  let component: JrimaMovieGenresComponent;
+  let fixture: ComponentFixture<JrimaMovieGenresComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JrimaActorRolesComponent ]
+      declarations: [ JrimaMovieGenresComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JrimaActorRolesComponent);
+    fixture = TestBed.createComponent(JrimaMovieGenresComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

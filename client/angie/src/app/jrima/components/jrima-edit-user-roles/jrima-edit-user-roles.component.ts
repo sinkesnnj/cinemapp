@@ -3,22 +3,22 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-jrima-edit-actor-roles',
-  templateUrl: './jrima-edit-actor-roles.component.html',
-  styleUrls: ['./jrima-edit-actor-roles.component.css']
+  selector: 'app-jrima-edit-user-roles',
+  templateUrl: './jrima-edit-user-roles.component.html',
+  styleUrls: ['./jrima-edit-user-roles.component.css']
 })
-export class JrimaEditActorRolesComponent implements OnInit {
-  url = 'admin/actor_roles';
+export class JrimaEditUserRolesComponent implements OnInit {
+  url = 'admin/user_roles';
   id = null;
   default_movie = 0;
 
   fields: FormlyFieldConfig[] = [
     {
-      key: 'actor_id',
+      key: 'user_id',
       type: 'input',
       templateOptions: {
-        label: 'Actor Id',
-        placeholder: 'Actor Id',
+        label: 'User Id',
+        placeholder: 'User Id',
         type: 'number',
         required: true,
       }
