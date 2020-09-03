@@ -48,7 +48,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: cinemapp_production
-  username: cinemapp
-  password: <%= ENV['CINEMAPP_DATABASE_PASSWORD'] %>
+  url: "mysql2://6sNvRY88Gk:sF6srMyr9c@remotemysql.com/6sNvRY88Gk"
