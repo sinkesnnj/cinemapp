@@ -11,6 +11,16 @@ class MoviesController < ApplicationController
         }, status: 200
     end
 
+    def showtimes
+        showtimes = Showtime.where('projection_date > ?', DateTime.now.utc).where(movie_id: params[:id]).order(projection_date: :asc, projection_time: :asc)
+
+        render json: {
+            data: {
+                showtimes: showtimes
+            }
+        }, status: 200
+    end
+
     def index
         movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).offset((params[:page].to_i-1)*4).limit(5)
 

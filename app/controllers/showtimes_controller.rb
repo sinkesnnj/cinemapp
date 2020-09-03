@@ -1,6 +1,28 @@
 class ShowtimesController < ApplicationController
     before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
 
+    def index
+        movies = Movie.order(created_at: :desc).offset((params[:page].to_i-1)*4).limit(5)
+        if movies.present?
+            movies.each do |movie|
+                movie_genres = MovieGenre.where(movie_id: movie.id)
+                genres = nil
+                genres = Genre.where(id: movie_genres.map(&:genre_id)).distinct if movie_genres.present?
+                genres = genres.map {|g| g.genre_name}.join(', ') if genres.present?
+                movie.genres = genres
+
+                showtimes = Showtime.where('projection_date > ?', DateTime.now.utc).where(movie_id: movie.id).order(projection_date: :asc).limit(3)
+                movie.showtimes = showtimes.present? ? showtimes : []
+            end
+        end
+
+        render json: {
+            data: {
+                movies: movies.to_json(:methods => [:genres, :showtimes])
+            }
+        }, status: 200
+    end
+
     def admin
         return unless is_admin?
 

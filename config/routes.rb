@@ -14,8 +14,11 @@ Rails.application.routes.draw do
   get '/movies/index', to: 'movies#index'
   get '/movies/dashboard', to: 'movies#dashboard'
   get '/movies/show/:id', to: 'movies#show'
+  get '/movies/:id/showtimes', to: 'movies#showtimes'
 
-  get '/theatres/index', to: 'theatres#index'
+  get '/showtimes/index', to: 'showtimes#index'
+  get '/showtime_users/:id', to: 'showtime_users#show'
+  post '/showtime_users/:id/reserve', to: 'showtime_users#reserve'
 
   get '/admin/movies', to: 'movies#admin'
   post '/admin/movies/create', to: 'movies#create'
