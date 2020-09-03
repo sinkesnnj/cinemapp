@@ -53,8 +53,77 @@ class UsersController < ApplicationController
     end
 
     def download
-        kit = PDFKit.new('<p>asd</p>', {orientation: 'Landscape'})
-        send_data(kit.to_pdf, type: 'application/pdf', disposition: 'attachment;filename=asd.pdf')
+        su = ShowtimeUser.find(params[:id])
+        st = Showtime.find(su.showtime_id)
+        theatre = Theatre.find(st.theatre_id)
+        movie = Movie.find(st.movie_id)
+        user = User.find(su.user_id)
+        html = "
+        <html>
+        <head>
+            <style>
+            .ticket-list .panel-heading {
+                background-color:#F4F8F9;
+                border-bottom: none;
+            }
+            .ticket-list .panel-body {
+                background-color:#F4F8F9;
+            }
+            .ticket-list .table-head{
+                border: none;  
+            }
+            </style>
+            <link href='http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' rel='stylesheet' id='bootstrap-css'>
+            <!------ Include the above in your HEAD tag ---------->
+        </head>
+        <body>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <div class='panel panel-default ticket-list'>
+                      <div class='panel-heading'>
+                        <h3 class='panel-title text-center'>Cinemapp Movie Reservation</h3>
+                      </div>
+                      <div class='panel-body'>
+                          <table class='table'>
+                            <thead class='table-head'>
+                              <tr class='table-head'>
+                                <th>Movie name</th>
+                                <th>Movie date</th>
+                                <th>Movie time</th>
+                                <th>Theatre</th>
+                                <th>Row/Seat</th>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>movie_name</td>
+                                <td>movie_date</td>
+                                <td>movie_time</td>
+                                <td>theatre_name</td>
+                                <td>row_seat</td>
+                                <td>user_name</td>
+                              </tr>
+                            </tbody>
+                          </table>    	
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </body>
+        </html>"
+
+        html.gsub!(/movie_name/, movie.name)
+        html.gsub!(/movie_date/, st.projection_date.strftime("%F"))
+        html.gsub!(/movie_time/, st.projection_time.strftime("%T"))
+        html.gsub!(/theatre_name/, theatre.name)
+        html.gsub!(/user_name/, user.name)
+        html.gsub!(/row_seat/, "#{su.row_number}/#{su.seat_number}")
+
+        kit = PDFKit.new(html, {orientation: 'Landscape'})
+        send_data(kit.to_pdf, type: 'application/pdf', disposition: 'attachment;filename=cinemapp_reservation.pdf')
     end
 
     def admin
