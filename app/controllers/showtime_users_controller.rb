@@ -1,5 +1,5 @@
 class ShowtimeUsersController < ApplicationController
-    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update, :reserve]
 
     def admin
         return unless is_admin?

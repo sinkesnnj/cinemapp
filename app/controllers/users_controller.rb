@@ -22,11 +22,12 @@ class UsersController < ApplicationController
                 LEFT JOIN movies m ON s.movie_id = m.id
                 LEFT JOIN theatres t ON s.theatre_id = t.id
                 LEFT JOIN users u ON su.user_id = u.id
-            ORDER BY s.created_at DESC
+            WHERE su.user_id = :current_user
+            ORDER BY su.created_at DESC
             LIMIT 6
             OFFSET :offset"
         
-        sql_params = {offset: (params[:page].to_i-1)*5}
+        sql_params = {offset: (params[:page].to_i-1)*5, current_user: current_user.id}
         showtimes = ShowtimeUser.find_by_sql([sql_query, sql_params])
 
         render json: {
@@ -119,7 +120,7 @@ class UsersController < ApplicationController
         html.gsub!(/movie_date/, st.projection_date.strftime("%F"))
         html.gsub!(/movie_time/, st.projection_time.strftime("%T"))
         html.gsub!(/theatre_name/, theatre.name)
-        html.gsub!(/user_name/, user.name)
+        html.gsub!(/user_name/, user.name.presence || 'N/A')
         html.gsub!(/row_seat/, "#{su.row_number}/#{su.seat_number}")
 
         kit = PDFKit.new(html, {orientation: 'Landscape'})

@@ -15,10 +15,12 @@ class ShowtimesController < ApplicationController
                 movie.showtimes = showtimes.present? ? showtimes : []
             end
         end
+        theatres = Theatre.all
 
         render json: {
             data: {
-                movies: movies.to_json(:methods => [:genres, :showtimes])
+                movies: movies.to_json(:methods => [:genres, :showtimes]),
+                theatres: theatres
             }
         }, status: 200
     end
