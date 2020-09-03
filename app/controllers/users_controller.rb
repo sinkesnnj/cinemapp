@@ -6,11 +6,15 @@ class UsersController < ApplicationController
         user = User.select(:id, :name, :nickname, :email, :image).where(id: current_user.id).first
         user_role = UserRole.where(user_id: current_user.id).order(role_id: :desc).first
         role = Role.select(:id, :name).where(id: user_role.role_id)
+        reviews = Review.where(user_id: current_user.id).order(created_at: :asc)
+        sum = Review.where(user_id: current_user.id).sum(:rating)
+        avg = sum/reviews.size
 
         render json: {
             data: {
                 user: user,
-                role: role
+                role: role,
+                averate_rating: avg
             }
         }, status: 200
     end
