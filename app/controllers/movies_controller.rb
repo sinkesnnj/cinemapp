@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update]
+    before_action :authenticate_user!, only: [:admin, :destroy, :create, :edit, :update, :comment]
 
     def dashboard
         movies = Movie.select(:id, :name, :summary, :poster_path).order(created_at: :desc).offset((params[:page].to_i-1)*6).limit(7)
@@ -35,14 +35,42 @@ class MoviesController < ApplicationController
         movie = Movie.where(id: params[:id]).first
         actors = Actor.find_by_sql(["SELECT a.id, a.name, a.surname FROM actors a JOIN movie_actors ma ON a.id = ma.actor_id WHERE ma.movie_id = :movie_id", {movie_id: movie.id}])
         genre = Genre.find_by_sql(["SELECT DISTINCT g.genre_name FROM genres g JOIN movie_genres mg ON g.id = mg.genre_id WHERE mg.movie_id = :movie_id", {movie_id: movie.id}])
+        reviews = Review.where(movie_id: params[:id]).order(created_at: :asc)
+        reviewers = User.where(id: reviews.map(&:user_id))
 
         render json: {
             data: {
                 movie: movie,
                 actors: actors,
-                genre: genre
+                genre: genre,
+                reviews: reviews,
+                reviewers: reviewers
             }
         }, status: 200
+    end
+
+    def comment
+        review = Review.new
+        review.movie_id = params[:id]
+        review.rating = params[:rating] if params.key?(:rating)
+        review.review_text = params[:review_text] if params.key?(:review_text)
+        review.user_id = current_user.id unless params.key?(:anonymous) && params[:anonymous].eql?(true)
+        status = 400
+        status = 200 if review.save
+       
+        reviews = Review.where(movie_id: params[:id]).order(created_at: :asc)
+        reviewers = User.where(id: reviews.map(&:user_id))
+        movie = Movie.where(id: params[:id]).first
+        sum = Review.where(movie_id: params[:id]).sum(:rating)
+        movie.rating = (sum/reviews.size).round
+        movie.save
+        render json: {
+            data: {
+                reviews: reviews,
+                reviewers: reviewers,
+                movie: movie
+            }
+        }, status: status
     end
 
     def admin

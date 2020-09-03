@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/movies/dashboard', to: 'movies#dashboard'
   get '/movies/show/:id', to: 'movies#show'
   get '/movies/:id/showtimes', to: 'movies#showtimes'
+  post '/movies/:id/comment', to: 'movies#comment'
 
   get '/showtimes/index', to: 'showtimes#index'
   get '/showtime_users/:id', to: 'showtime_users#show'

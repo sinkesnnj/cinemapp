@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
 
   def create_role
-    role = Role.where(name: 'Regular User').first
+    role = Role.where(name: 'Standard').first
 
     if role.present?
       ur = UserRole.new

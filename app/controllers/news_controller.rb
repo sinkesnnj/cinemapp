@@ -19,7 +19,7 @@ class NewsController < ApplicationController
             news_categories = news_categories.map(&:news_id)
             news = News.where(id: news_categories).offset((params[:page].to_i-1)*3).limit(4)
         else
-            news = News.select(:id, :title, :short_description, :poster_path, :updated_at).order(created_at: :desc).offset((params[:page].to_i-1)*3).limit(4)
+            news = News.select(:id, :title, :short_description, :poster_path, :updated_at).order(updated_at: :desc).offset((params[:page].to_i-1)*3).limit(4)
         end
 
         render json: {
