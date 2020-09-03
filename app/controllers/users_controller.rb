@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    respond_to :html, :json, :pdf
+    # respond_to :html, :json, :pdf
     before_action :authenticate_user!, except: [:download]
 
     def my_account
@@ -11,6 +11,27 @@ class UsersController < ApplicationController
             data: {
                 user: user,
                 role: role
+            }
+        }, status: 200
+    end
+
+    def my_tickets
+        sql_query = "SELECT su.id, m.name AS movie_name, t.name AS theatre_name, u.email AS user_email, su.row_number, su.seat_number
+            FROM showtime_users su
+                LEFT JOIN showtimes s ON su.showtime_id = s.id
+                LEFT JOIN movies m ON s.movie_id = m.id
+                LEFT JOIN theatres t ON s.theatre_id = t.id
+                LEFT JOIN users u ON su.user_id = u.id
+            ORDER BY s.created_at DESC
+            LIMIT 6
+            OFFSET :offset"
+        
+        sql_params = {offset: (params[:page].to_i-1)*5}
+        showtimes = ShowtimeUser.find_by_sql([sql_query, sql_params])
+
+        render json: {
+            data: {
+                tickets: showtimes
             }
         }, status: 200
     end
