@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!
+    respond_to :html, :json, :pdf
+    before_action :authenticate_user!, except: [:download]
 
     def my_account
         user = User.select(:id, :name, :nickname, :email, :image).where(id: current_user.id).first
@@ -28,6 +29,11 @@ class UsersController < ApplicationController
         end
 
         render json: {}, status: status
+    end
+
+    def download
+        kit = PDFKit.new('<p>asd</p>', {orientation: 'Landscape'})
+        send_data(kit.to_pdf, type: 'application/pdf', disposition: 'attachment;filename=asd.pdf')
     end
 
     def admin

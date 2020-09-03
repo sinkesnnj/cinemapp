@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/users/my_account', to: 'users#my_account'
   put '/users/my_account', to: 'users#update_my_account'
+  get '/users/download', to: 'users#download'
 
   get '/news/index', to: 'news#index'
   get '/news/carousel', to: 'news#carousel'
