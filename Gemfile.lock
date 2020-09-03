@@ -165,6 +165,8 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wkhtmltopdf-binary-edge (0.12.6.0)
+    wkhtmltopdf-heroku (2.12.5.0)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -183,6 +185,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  wkhtmltopdf-binary-edge
+  wkhtmltopdf-heroku
 
 RUBY VERSION
    ruby 2.5.1p57
