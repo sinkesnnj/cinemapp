@@ -28,7 +28,7 @@ class ShowtimesController < ApplicationController
     def admin
         return unless is_admin?
 
-        sql_query = "SELECT s.id, m.name AS movie_name, t.name AS theatre_name, s.projection_date, to_char(s.projection_time, 'HH24:MI') AS projection_time
+        sql_query = "SELECT s.id, m.name AS movie_name, t.name AS theatre_name, s.projection_date, s.projection_time AS projection_time
             FROM showtimes s
                 LEFT JOIN movies m ON s.movie_id = m.id
                 LEFT JOIN theatres t ON s.theatre_id = t.id
