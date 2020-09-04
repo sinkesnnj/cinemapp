@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
 
   after_create :create_role
 
-  def send_on_create_confirmation_instructions
-    return
+  def send_confirmation_notification?
+    false
   end
 
   protected
