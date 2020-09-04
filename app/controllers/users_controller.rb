@@ -125,7 +125,7 @@ class UsersController < ApplicationController
         html.gsub!(/movie_time/, st.projection_time.strftime("%T"))
         html.gsub!(/theatre_name/, theatre.name)
         html.gsub!(/user_name/, user.name.presence || 'N/A')
-        html.gsub!(/row_seat/, "#{su.row_number}/#{su.seat_number}")
+        html.gsub!(/row_seat/, "#{su.row_number + 1}/#{su.seat_number + 1}")
 
         kit = PDFKit.new(html, {orientation: 'Landscape'})
         send_data(kit.to_pdf, type: 'application/pdf', disposition: 'attachment;filename=cinemapp_reservation.pdf')
