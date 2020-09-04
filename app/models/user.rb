@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
 
   after_create :create_role
 
+  def send_on_create_confirmation_instructions
+    return
+  end
+
   protected
 
   def confirmation_required?
