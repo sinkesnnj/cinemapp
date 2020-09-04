@@ -4,10 +4,6 @@ class User < ActiveRecord::Base
 
   after_create :create_role
 
-  def send_confirmation_notification?
-    false
-  end
-
   protected
 
   def confirmation_required?
@@ -15,6 +11,9 @@ class User < ActiveRecord::Base
   end
 
   def create_role
+    self.confirmed_at = DateTime.now.utc
+    self.save
+
     role = Role.where(name: 'Standard').first
 
     if role.present?
